@@ -5,7 +5,6 @@ package GameOfLife;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -13,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,12 +45,14 @@ public class Main extends Application {
             private final Pair<Integer, Integer> gridDimensions = currGrid.getDimensions();
             private final int rowLen = gridDimensions.getKey();
             private final int colLen = gridDimensions.getValue();
-            private long prevUpdate = 0;
+            //uncomment line below to adjust speed
+            //private long prevUpdate = 0;
 
 
             @Override
             public void handle(long now) {
-                if (now - prevUpdate >= TimeUnit.SECONDS.toNanos(1)) {
+                //uncomment line below to adjust speed (change number)
+                //if (now - prevUpdate >= TimeUnit.SECONDS.toNanos(1)) {
                     gridPane.getChildren().clear();
 
                     for (Neighborhood neighborhood : currGrid) {
@@ -65,7 +65,7 @@ public class Main extends Application {
 
                         //colors in the rectangle based on state
                         if (middle == Cell.DEAD) {
-                            rect.setFill(Color.WHITE);
+                            rect.setFill(Color.LIGHTGRAY);
                         }
                         else {
                             rect.setFill(Color.BLACK);
@@ -81,9 +81,10 @@ public class Main extends Application {
 
                     currGrid = currGrid.evolve();
 
-                    prevUpdate = now;
+                    //uncomment line below to adjust speed
+                    //prevUpdate = now;
                 }
-            }
+            //}
         };
         timer.start();
 
